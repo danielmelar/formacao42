@@ -6,17 +6,16 @@
 /*   By: dyuri-de <dyuri-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 16:32:10 by dyuri-de          #+#    #+#             */
-/*   Updated: 2024/10/08 17:49:05 by dyuri-de         ###   ########.fr       */
+/*   Updated: 2024/10/09 20:20:28 by dyuri-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include <unistd.h>
 
-void	ft_sort_params(int argc, char **argv);
+void	ft_sort_params(char argc, char **argv);
 
 void	ft_putchar(char c);
-
-void	ft_putstr(char *str);
 
 int	ft_strcmp(char *s1, char *s2);
 
@@ -26,11 +25,10 @@ int	main(int argc, char **argv)
 	return (0);
 }
 
-void	ft_sort_params(int argc, char **argv)
+void	ft_sort_params(char argc, char **argv)
 {
 	int	param;
-	int	count;
-	char	*word_swap;
+	int	count;	
 
 	param = 1;
 	count = 0;
@@ -38,34 +36,20 @@ void	ft_sort_params(int argc, char **argv)
 	{
 		if (argc == 1)
 			break;
-		if (ft_strcmp(&argv[param][0], &argv[param - 1][0]) < 0)
+		while (argv[param][count] != '\0')
 		{
-			word_swap = argv[param];
-			argv[param] = argv[param - 1];
-			argv[param - 1] = word_swap;
-			param = 1;  
+			ft_putchar(argv[param][count]);
+			count++;
 		}
-		else
-		{
-			ft_putstr(argv[param]);
-			ft_putchar('\n');
-			param++;
-		}
+		ft_putchar('\n');
+		count = 0;
+		param++;
 	}
 }
 
 void	ft_putchar(char c)
 {
 	write(1, &c, 1);
-}
-
-void	ft_putstr(char *str)
-{
-	while (*str)
-	{
-		ft_putchar(*str);
-		str++;
-	}
 }
 
 int	ft_strcmp(char *s1, char *s2)
